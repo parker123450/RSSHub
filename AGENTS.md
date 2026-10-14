@@ -125,3 +125,11 @@
 53. **Comments Language**: Write code comments in English for consistency and accessibility.
 
 54. **Parentheses in Arrow Functions**: Always use parentheses around arrow function parameters, even for single parameters.
+
+## Cursor Cloud specific instructions
+
+- `package.json` requires Node.js `^22.20.0` or `^24`, and pnpm `10.28.0`. This environment puts Node.js 22.23.3 on `PATH` via `/usr/local/lib/nodejs/bin` (`/etc/profile.d/nodejs.sh`). An older `node` binary can appear earlier on `PATH` if that directory is not prepended.
+- Install dependencies with `pnpm install --frozen-lockfile`, then `pnpm run build:routes`. Tests load `assets/build/routes.json` from that command. `pnpm dev` loads route source directly and listens on port 1200 (`/healthz` returns `ok`).
+- The dev server is started on boot. Cache defaults to memory when `CACHE_TYPE` is unset. Redis is optional.
+- Puppeteer can use the system Chrome binary: `CHROMIUM_EXECUTABLE_PATH=/usr/local/bin/google-chrome`.
+- `pnpm run lint` is the lint check (existing warnings do not fail it). `pnpm exec vitest run <file>` runs a targeted test. `pnpm test` also runs the format check and full coverage.
